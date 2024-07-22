@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class PeraturanController extends Controller
 {
     public function index(){
-        return view('Pages.Peraturan');
+        return view('frontEnd.peraturan');
     }
 }

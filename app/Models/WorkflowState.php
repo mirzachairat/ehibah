@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class WorkflowState extends Model
 {
     use HasFactory;
-    protected $table ='workflow_state';
     protected $fillable = ['name','label','status','workflow_id'];
     protected $hidden = ['created_at','deleted_at','updated_at'];
 

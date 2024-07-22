@@ -62,6 +62,11 @@
                       class="link-danger">Register</a></p>
                 </div>
               </form>
+              @if (session('error'))
+                  <div style="color: red;">
+                      {{ session('error') }}
+                  </div>
+              @endif
             </div>
           </div>
         </div>

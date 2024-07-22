@@ -8,6 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Workflow extends Model
 {
     use HasFactory;
-    protected $table = 'workflow';
     protected $fillable = array('content_id', 'name', 'label','content_type');
 }

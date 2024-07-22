@@ -9,12 +9,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="{{env('APP_URL')}}/" class="nav-item nav-link active">Home</a>
-                <a href="{{env('APP_URL')}}/proposal" class="nav-item nav-link">Proposal</a>
-                <a href="{{env('APP_URL')}}/about" class="nav-item nav-link">Tentang</a>
-                <a href="{{env('APP_URL')}}/peraturan" class="nav-item nav-link">Peraturan</a>
-                <a href="hosting.html" class="nav-item nav-link">Pengumuman</a>
-                <a href="hosting.html" class="nav-item nav-link">Manual Book</a>
+                <a href="{{env('APP_URL')}}/" class="nav-item nav-link {{ Request::is('/') ? 'active' : '' }}">Home</a>
+                <a href="{{env('APP_URL')}}/proposal" class="nav-item nav-link {{ Request::is('proposal') ? 'active' : '' }}">Proposal</a>
+                <a href="{{env('APP_URL')}}/about" class="nav-item nav-link {{ Request::is('about') ? 'active' : '' }}">Tentang</a>
+                <a href="{{env('APP_URL')}}/peraturan" class="nav-item nav-link {{ Request::is('peraturan') ? 'active' : '' }}">Peraturan</a>
+                <a href="{{env('APP_URL')}}/pengumuman" class="nav-item nav-link {{ Request::is('pengumuman') ? 'active' : '' }}">Pengumuman</a>
+                <a href="{{env('APP_URL')}}/manualbook" class="nav-item nav-link {{ Request::is('manualbook') ? 'active' : '' }}">Manual Book</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Account</a>
                     <div class="dropdown-menu m-0">

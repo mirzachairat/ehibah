@@ -9,13 +9,12 @@ class LogLogin extends Model
 {
     use HasFactory;
 
-    protected $table = 'log_login';
 
     protected $guarded = ['id'];
     
     public function user()
     {
-        return $this->belongsTo('App\User','username','username');
+        return $this->belongsTo(User::class,'username','username');
     }
 	
     public function setUpdatedAtAttribute($value)

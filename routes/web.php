@@ -43,123 +43,155 @@ use App\Http\Controllers\BackEnd\ChecklistController;
     //     return view('Layouts.main');
     // });
 
-Route::get('/login', [AuthController::class, 'index'])->name('login');
-Route::get('/register', [AuthController::class, 'register']);
-
-Route::post('/loginPost', [AuthController::class, 'loginPost'])->name('loginPost');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    
-    //Front End  
-Route::get('/about', [AboutController::class, 'index']);
-Route::get('/peraturan', [PeraturanController::class, 'index']);
-Route::get('/manualbook', [ManualbookController::class, 'index']);
-Route::get('/proposal/myproposal', [ProposalController::class, 'myproposal'])->name('myproposal');
-Route::get('/', [FrontController::class ,'index'])->name('home');
-Route::get('/search', 'FrontController@search')->name('searchHome');
-Route::get('/kecamatan/{id}', 'FrontController@Kecamatan');
-Route::get('/rekobj/{id}', 'FrontController@rekobj');
-Route::get('/kegiatan/{id}', 'FrontController@kegiatan');
-Route::get('/rekrincian/{id}', 'FrontController@rekrincian');
-Route::get('/sub/{id}', 'FrontController@sub');
-Route::get('/kelurahan/{id}', 'FrontController@Kelurahan');
-
-Route::get('/proposal', [ProposalController::class,'index'])->name('proposal');
-Route::get('/proposal/search', 'ProposalController@search')->name('searchProposal');
-Route::get('/proposal/show/{id}', 'ProposalController@show')->name('ShowProposal');
-Route::get('/proposal/arsip/{id}', 'ProposalController@arsip')->name('ArsipProposal');
-Route::post('/proposal/uploadPhotos', 'ProposalController@uploadPhotos');
-Route::get('/proposal/{id}/delImg', 'ProposalController@delImg')->name('delImgs');
-Route::post('/proposal/uploadFile', 'ProposalController@uploadFile');
-Route::get('/proposal/{id}/delFile', 'ProposalController@delFile')->name('delFiles');
-Route::post('/proposal/uploadFileLPJ', 'ProposalController@uploadFileLPJ');
-Route::get('/proposal/{id}/delFileLPJ', 'ProposalController@delFileLPJ')->name('delFileLPJs');
-
-Route::get('/proposal/myproposal', 'ProposalController@myproposal')->name('myproposal');
-Route::get('/proposal/searchmyproposal', 'ProposalController@searchmyproposal')->name('searchMyProposal');
-Route::get('/proposal/create', 'ProposalController@create')->name('createProposal');
-Route::post('/proposal/store', 'ProposalController@store')->name('storeProposal');
-Route::get('/proposal/edit/{id}', 'ProposalController@edit')->name('editProposal');
-Route::put('/proposal/update/{id}', 'ProposalController@update')->name('updateProposal');
-Route::get('/proposal/delete/{id}', 'ProposalController@destroy')->name('deleteProposal');
-Route::get('/peraturan', 'PeraturanController@index')->name('peraturan');
-Route::get('/pengumuman', 'PengumumanController@index')->name('pengumuman');
-Route::get('/pengumuman/show/{id}', 'PengumumanController@show')->name('ShowPengumuman');
-Route::get('/tentang', 'TentangController@index')->name('tentang');
-
-Route::post('/laporan/store', 'LaporanController@store')->name('submitStore');
-Route::get('/kecamatans/{id}', 'FrontController@Kecamatans');
-Route::get('/kelurahans/{id}', 'FrontController@Kelurahans');
-
-Route::get('/tabel', 'TabelController@index')->name('tabel');
-Route::get('/tabel/search', 'TabelController@search')->name('searchTabel');
-
-Route::get('/laporan', 'LaporanController@index')->name('laporan');
-Route::get('/reward', 'RewardController@index')->name('reward');
-Route::get('/upload/book', 'RewardController@index')->name('reward');
-Route::get('/show/{id}', 'FrontController@show')->name('Show');
-Route::post('/comment/{id}/edit', 'FrontController@commentSubmit')->name('commentSubmit');
-Route::post('/comment/{id}/getKoment', 'FrontController@getKoment')->name('getKoment');
-
-Route::get('/like/{id}', 'FrontController@Like')->name('Like');
-Route::get('/unlike/{id}', 'FrontController@Unlike')->name('Unlike');
-Route::get('/view/{id}/viewer', 'FrontController@Viewer')->name('Viewer');
-
-Route::get('/profile', 'ProfileController@index')->name('myprofile');
-Route::get('/profile/edit', 'ProfileController@edit')->name('EditMyProfile');
-Route::put('/profile/update', 'ProfileController@update')->name('UpdateMyProfile');
-
-//Back End Controller
-Route::Group(['middleware'=>'auth', 'prefix' =>'admin', 'namespace' =>'backEnd'], function(){
-    Route::get('/',[HomeController::class, 'index'])->name('adminHome');
-
-    Route::get('/log', 'LogController@index')->name('log');	
-	Route::get('/log-login', 'LogLoginController@index')->name('log-login');	
-
-    Route::get('/proposals', [Proposal_backend::class, 'index'])->name('proposals');
-	Route::get('/proposals/create', [ProposalController::class,'create'])->name('proposalsCreate');
-	Route::get('/proposals/{id}/edit', [ProposalController::class,'edit'])->name('proposalsEdit');
-	Route::get('/proposals/{id}/arsip', [ProposalController::class ,'arsip'])->name('proposalsArsip');
-	Route::get('/proposals/search', [ProposalController::class,'search'])->name('proposalsSearch');
-	Route::get('/proposals/{id}/show', [ProposalController::class, 'show'])->name('proposalsShow');
-	Route::get('/proposals/{id}/koreksi', [ProposalController::class, 'koreksi'])->name('proposalsKoreksi');
-	Route::get('/proposals/export', [ProposalController::class,'export'])->name('proposalsExport');
-
-    //SKPD ROUTE
-    Route::get('/skpd', [SkpdController::class,'index'])->name('skpd');
-	Route::get('/skpd/search', [SkpdController::class,'search'])->name('SkpdSearch');
-	Route::get('/skpd/create', [SkpdController::class,'create'])->name('SkpdCreate');
-	Route::post('/skpd/store', [SkpdController::class,'store'])->name('SkpdStore');
-	Route::get('/skpd/{id}/edit', [SkpdController::class,'edit'])->name('SkpdEdit');
-	Route::get('/skpd/{id}/show', [SkpdController::class,'show'])->name('Skpd_show');
-	Route::post('/skpd/{id}/update', [SkpdController::class,'update'])->name('SkpdUpdate');
-	Route::get('/skpd/{id}/softdestroy', [SkpdController::class,'destroy'])->name('Skpddestroy');
-
-	//Sub SKPD
-	Route::get('/sub', [SubController::class,'index'])->name('sub');
-	Route::get('/sub/search', [SubController::class,'search'])->name('SubSearch');
-	Route::get('/sub/create', [SubController::class,'create'])->name('SubCreate');
-	Route::post('/sub/store', [SubController::class,'store'])->name('SubStore');
-	Route::get('/sub/{id}/edit', [SubController::class,'edit'])->name('SubEdit');
-	Route::get('/sub/{id}/show', [SubController::class,'show'])->name('Sub_show');
-	Route::post('/sub/{id}/update', [SubController::class,'update'])->name('SubUpdate');
-	Route::get('/sub/{id}/softdestroy', [SubController::class,'destroy'])->name('Subdestroy');
-
-	//Workflow
-	Route::get('/workflow', [WorkflowController::class, 'index'])->name('Workflow');
-	Route::get('/workflow/state', [WorkflowStateController::class, 'index'])->name('State');
-	Route::get('/workflow/transition', [WorkflowTransitionController::class, 'index'])->name('Transition');
-	Route::get('/workflow/guard', [WorkflowGuardController::class, 'index'])->name('Guard');
-	Route::get('/workflow/notification', [WorkflowNotificationController::class, 'index'])->name('Notification');
-
-	//User
-	Route::get('/user', [UserController::class, 'index'])->name('User');
-	Route::get('/user/permission', [PermissionController::class, 'index'])->name('Permission');
-	Route::get('/user/role', [RoleController::class, 'index'])->name('Role');
-	Route::get('/tentang', [DataTentangController::class, 'index'])->name('DataTentang');
-	Route::get('/peraturan', [DataPeraturanController::class, 'index'])->name('DataPeraturan');
-	Route::get('/pengumuman', [DataPengumumanController::class, 'index'])->name('DataPengumuman');
-	Route::get('/checklist', [ChecklistController::class, 'index'])->name('Checklist');
-
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/login', 'index')->name('login');
+    Route::get('/register', 'register');
+    Route::post('/loginPost', 'loginPost')->name('loginPost');
+    Route::get('/logout', 'logout')->name('logout');
 });
 
+// Front End  
+Route::controller(AboutController::class)->group(function () {
+    Route::get('/about', 'index');
+});
+
+Route::controller(PeraturanController::class)->group(function () {
+    Route::get('/peraturan', 'index');
+});
+
+Route::controller(ManualbookController::class)->group(function () {
+    Route::get('/manualbook', 'index');
+});
+
+Route::controller(ProposalController::class)->group(function () {
+    Route::get('/proposal/myproposal', 'myproposal')->name('myproposal');
+    Route::get('/proposal', 'index')->name('proposal');
+    Route::get('/proposal/search', 'search')->name('searchProposal');
+    Route::get('/proposal/show/{id}', 'show')->name('ShowProposal');
+    Route::get('/proposal/arsip/{id}', 'arsip')->name('ArsipProposal');
+    Route::post('/proposal/uploadPhotos', 'uploadPhotos');
+    Route::get('/proposal/{id}/delImg', 'delImg')->name('delImgs');
+    Route::post('/proposal/uploadFile', 'uploadFile');
+    Route::get('/proposal/{id}/delFile', 'delFile')->name('delFiles');
+    Route::post('/proposal/uploadFileLPJ', 'uploadFileLPJ');
+    Route::get('/proposal/{id}/delFileLPJ', 'delFileLPJ')->name('delFileLPJs');
+    Route::get('/proposal/searchmyproposal', 'searchmyproposal')->name('searchMyProposal');
+    Route::get('/proposal/create', 'create')->name('createProposal');
+    Route::post('/proposal/store', 'store')->name('storeProposal');
+    Route::get('/proposal/edit/{id}', 'edit')->name('editProposal');
+    Route::put('/proposal/update/{id}', 'update')->name('updateProposal');
+    Route::get('/proposal/delete/{id}', 'destroy')->name('deleteProposal');
+});
+
+Route::controller(FrontController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
+    Route::get('/search', 'search')->name('searchHome');
+    Route::get('/kecamatan/{id}', 'Kecamatan');
+    Route::get('/rekobj/{id}', 'rekobj');
+    Route::get('/kegiatan/{id}', 'kegiatan');
+    Route::get('/rekrincian/{id}', 'rekrincian');
+    Route::get('/sub/{id}', 'sub');
+    Route::get('/kelurahan/{id}', 'Kelurahan');
+    Route::get('/pengumuman', 'pengumuman')->name('pengumuman');
+    Route::get('/pengumuman/show/{id}', 'show')->name('ShowPengumuman');
+    Route::get('/tentang', 'tentang')->name('tentang');
+    Route::get('/kecamatans/{id}', 'Kecamatans');
+    Route::get('/kelurahans/{id}', 'Kelurahans');
+    Route::get('/tabel', 'tabel')->name('tabel');
+    Route::get('/tabel/search', 'search')->name('searchTabel');
+    Route::get('/laporan', 'index')->name('laporan');
+    Route::get('/reward', 'index')->name('reward');
+    Route::get('/upload/book', 'index')->name('reward');
+    Route::get('/show/{id}', 'show')->name('Show');
+    Route::post('/comment/{id}/edit', 'commentSubmit')->name('commentSubmit');
+    Route::post('/comment/{id}/getKoment', 'getKoment')->name('getKoment');
+    Route::get('/like/{id}', 'Like')->name('Like');
+    Route::get('/unlike/{id}', 'Unlike')->name('Unlike');
+    Route::get('/view/{id}/viewer', 'Viewer')->name('Viewer');
+    Route::get('/profile', 'index')->name('myprofile');
+    Route::get('/profile/edit', 'edit')->name('EditMyProfile');
+    Route::put('/profile/update', 'update')->name('UpdateMyProfile');
+});
+
+//Back End Controller
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::controller(HomeController::class)->group(function () {
+        Route::get('/', 'index')->name('adminHome');
+    });
+
+    Route::controller(LogController::class)->group(function () {
+        Route::get('/log', 'index')->name('log');
+    });
+
+    Route::controller(LogLoginController::class)->group(function () {
+        Route::get('/log-login', 'index')->name('log-login');
+    });
+
+    Route::controller(Proposal_backend::class)->group(function () {
+        Route::get('/proposals', 'index')->name('proposals');
+        Route::get('/proposals/create', 'create')->name('proposalsCreate');
+        Route::get('/proposals/{id}/edit', 'edit')->name('proposalsEdit');
+        Route::get('/proposals/{id}/arsip', 'arsip')->name('proposalsArsip');
+        Route::get('/proposals/search', 'search')->name('proposalsSearch');
+        Route::get('/proposals/{id}/show', 'show')->name('proposalsShow');
+        Route::get('/proposals/{id}/koreksi', 'koreksi')->name('proposalsKoreksi');
+        Route::get('/proposals/export', 'export')->name('proposalsExport');
+    });
+
+    //SKPD ROUTE
+    Route::controller(SkpdController::class)->group(function () {
+        Route::get('/skpd', 'index')->name('skpd');
+        Route::get('/skpd/search', 'search')->name('SkpdSearch');
+        Route::get('/skpd/create', 'create')->name('SkpdCreate');
+        Route::post('/skpd/store', 'store')->name('SkpdStore');
+        Route::get('/skpd/{id}/edit', 'edit')->name('SkpdEdit');
+        Route::get('/skpd/{id}/show', 'show')->name('Skpd_show');
+        Route::post('/skpd/{id}/update', 'update')->name('SkpdUpdate');
+        Route::get('/skpd/{id}/softdestroy', 'destroy')->name('Skpddestroy');
+    });
+
+    //Sub SKPD
+    Route::controller(SubController::class)->group(function () {
+        Route::get('/sub', 'index')->name('sub');
+        Route::get('/sub/search', 'search')->name('SubSearch');
+        Route::get('/sub/create', 'create')->name('SubCreate');
+        Route::post('/sub/store', 'store')->name('SubStore');
+        Route::get('/sub/{id}/edit', 'edit')->name('SubEdit');
+        Route::get('/sub/{id}/show', 'show')->name('Sub_show');
+        Route::post('/sub/{id}/update', 'update')->name('SubUpdate');
+        Route::get('/sub/{id}/softdestroy', 'destroy')->name('Subdestroy');
+    });
+
+    //Workflow
+    Route::controller(WorkflowController::class)->group(function () {
+        Route::get('/workflow', 'index')->name('Workflow');
+        Route::get('/workflow/state', 'index')->name('State');
+        Route::get('/workflow/transition', 'index')->name('Transition');
+        Route::get('/workflow/guard', 'index')->name('Guard');
+        Route::get('/workflow/notification', 'index')->name('Notification');
+    });
+
+    //User
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/user', 'index')->name('User');
+        Route::get('/user/permission', 'index')->name('Permission');
+        Route::get('/user/role', 'index')->name('Role');
+    });
+
+    Route::controller(DataTentangController::class)->group(function () {
+        Route::get('/tentang', 'index')->name('DataTentang');
+    });
+
+    Route::controller(DataPeraturanController::class)->group(function () {
+        Route::get('/peraturan', 'index')->name('DataPeraturan');
+    });
+
+    Route::controller(DataPengumumanController::class)->group(function () {
+        Route::get('/pengumuman', 'index')->name('DataPengumuman');
+    });
+
+    Route::controller(ChecklistController::class)->group(function () {
+        Route::get('/checklist', 'index')->name('Checklist');
+    });
+});
 

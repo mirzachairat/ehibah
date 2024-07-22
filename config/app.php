@@ -212,6 +212,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'MetaTag'   => Torann\LaravelMetaTags\Facades\MetaTag::class,
+        'Helper' => App\Helpers\Helper::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 

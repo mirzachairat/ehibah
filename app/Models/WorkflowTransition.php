@@ -8,6 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class WorkflowTransition extends Model
 {
     use HasFactory;
-    protected $table ='workflow_transition';
     protected $fillable = ['name','label','from','to','message','status','workflow_id'];
 }

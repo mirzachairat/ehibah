@@ -21,13 +21,14 @@ use App\Models\Checklist;
 use App\Models\History;
 use App\Models\WorkflowTransition;
 use App\Models\Workflow;
-use MetaTag,Helper;
+use MetaTag;
 use App\Models\User;
 use App\Models\Permission;
 use Auth,Validator,Input, Exception,Image,Redirect;
 use File;
 use Session;
 use App\Http\Requests;
+use App\Helpers\Helper;
 use Illuminate\Support\Facades\DB;
 
 class ProposalController extends Controller
@@ -67,13 +68,13 @@ class ProposalController extends Controller
     public function create()
     {
         //jika sudah bisa create bisa didelete
-        // $locked = Helper::locked();
-        if($locked != 1){
-            if(!Auth::user()->hasRole('superadministrator') && !Auth::user()->hasRole('administrator')){
-                Session::flash('warning', 'Input Proposal Hibah Bansos Telah Ditutup.');
-                return redirect()->route('proposal');
-            }
-        }		
+        $locked = Helper::locked();
+        // if($locked != 1){
+        //     if(!Auth::user()->hasRole('superadministrator') && !Auth::user()->hasRole('administrator')){
+        //         Session::flash('warning', 'Input Proposal Hibah Bansos Telah Ditutup.');
+        //         return redirect()->route('proposal');
+        //     }
+        // }		
         
         $tahunanggaran = Helper::tahunanggaran();
         if($tahunanggaran == 1){
@@ -124,7 +125,6 @@ class ProposalController extends Controller
         }
         $State= WorkflowState::where('status', 1)->where('workflow_id',1)->get();
         $kota = Kota::where('id_provinsi','36')->orderBy('id_kota', 'desc')->get();
-        dd($kota);
         $skpd_id = $skpdid;
         $title = "Create Proposal";
         $titleproposal = "Back";

@@ -305,7 +305,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row per-row">
+                <div class="row per-row text-center wow fadeInUp" data-wow-delay="0.1s" style="margin-top:50px">
                     <h2>Grafik Proposal Tahun {{$th}}  {!! ($perubahan=='1')?'Perubahan':'' !!}</h2><hr style="margin-top: 0;">
                     <div class="col-lg-12">
                         <div class="row">

@@ -27,10 +27,12 @@ use App\Models\ProposalType;
 use App\Models\History;
 use App\Models\Program;
 use App\Models\Kegiatan;
+use App\Models\User;
 use Auth,Input, Exception,Validator, Image, Session, File, Redirect, Helper;
 
 class ProposalController extends Controller
 {
+	
     public function index()
     {
         $role_user = Auth::user()->role_id__;
@@ -67,10 +69,16 @@ class ProposalController extends Controller
 
 	public function create()
 	{
+		// Menambahkan peran ke pengguna
         //jika sudah bisa create bisa didelete
+
         $locked = Helper::locked();
+		$Userid = Auth::user();
+		dd($Userid);
+
+		$username = Auth::user();
         if($locked != 1){
-            if(!Auth::user()->hasRole('superadministrator') && !Auth::user()->hasRole('administrator')){
+            if(Auth::user()->role('superadministrator') && !Auth::user()->role('administrator')){
                 Session::flash('warning', 'Input Proposal Hibah Bansos Telah Ditutup.');
                 return redirect()->route('proposals')->with('message', 'Input Proposal Hibah Bansos Telah Ditutup.');
             }
@@ -81,7 +89,8 @@ class ProposalController extends Controller
 			$tahun = date('Y')+1;
 		}else{
 			$tahun = date('Y');
-		}	
+		}
+
 		$data['tahun']  = $tahun;
         $data['perubahan'] = Helper::perubahan();
         // Session::flash('warning', 'Input Proposal Hibah Bansos Telah Ditutup.');

@@ -65,7 +65,8 @@ class FrontController extends Controller
                                                ->where('sequence',1)
                                                ->whereIn('proposal_id',$typehibah)
                                                ->first();
-                        if(count($dananya) <> 0){
+                        // if(count($dananya) <> 0){
+                        if(count(array($dananya)) <> 0){
                             $nilaihibah = isset($dananya->nilai)?$dananya->nilai:0;
                         }
                         $Proposalhibah  = Proposal::select('tahun','type_id',DB::raw('COUNT(id) as jumlah'))
@@ -89,7 +90,7 @@ class FrontController extends Controller
                                                ->where('sequence',1)
                                                ->whereIn('proposal_id',$typebansos)
                                                ->first();
-                        if(count($dananya) <> 0){
+                        if(count(array($dananya)) <> 0){
                             $nilaibansos = isset($dananya->nilai)?$dananya->nilai:0;
                         }
                         $Proposalbansos  = Proposal::select('tahun','type_id',DB::raw('COUNT(id) as jumlah'))
@@ -149,7 +150,7 @@ class FrontController extends Controller
                                                        ->where('sequence',1)
                                                        ->whereIn('proposal_id',$typenyaopd)
                                                        ->first();
-                                if(count($dananyaopd) <> 0){
+                                if(count(array($dananyaopd)) <> 0){
                                     array_push($nilaiopd, $dananyaopd->nilai);
                                 }
                             }
@@ -161,13 +162,13 @@ class FrontController extends Controller
                             ->where('skpd_id',$skpdid)
                             ->groupBy('skpd_id')
                             ->orderBy('proposal.skpd_id', 'ASC')->first();
-                            if(count($Proposaljenisopdhibah) <> 0){
+                            if(count(array($Proposaljenisopdhibah)) <> 0){
                                 array_push($jumlahhibah, $Proposaljenisopdhibah->jumlah);
                             }else{
                                 array_push($jumlahhibah, 0);
                             }
                             
-
+                            $Proposaltypeid = Proposal::where('type_id',2);
                             $Proposaljenisopdbansos  = Proposal::select(DB::raw('COUNT(id) as jumlah'))
                             ->where('tahun',$lastyear)
                             ->where('perubahan',$perubahan)
@@ -175,7 +176,7 @@ class FrontController extends Controller
                             ->where('skpd_id',$skpdid)
                             ->groupBy('skpd_id')
                             ->orderBy('proposal.skpd_id', 'ASC')->first();
-                            if(count($Proposaljenisopdbansos) <> 0){
+                            if($Proposaljenisopdbansos !== null && count(array($Proposaljenisopdbansos)) <> 0){
                                 array_push($jumlahbansos, $Proposaljenisopdbansos->jumlah);
                             }else{
                                 array_push($jumlahbansos, 0);
@@ -226,7 +227,7 @@ class FrontController extends Controller
                                                        ->where('sequence',1)
                                                        ->whereIn('proposal_id',$typenyastate)
                                                        ->first();
-                                if(count($dananyastate) <> 0){
+                                if(count(array($dananyastate)) <> 0){
                                     array_push($nilaistate, $dananyastate->nilai);
                                 }
                             }
@@ -238,7 +239,7 @@ class FrontController extends Controller
                             ->where('current_stat',$currentstat)
                             ->groupBy('current_stat')
                             ->orderBy('proposal.current_stat', 'ASC')->first();
-                            if(count($Proposalstatehibah) <> 0){
+                            if(count(array($Proposalstatehibah)) <> 0){
                                 array_push($jumlahhibahstate, $Proposalstatehibah->jumlah);
                             }else{
                                 array_push($jumlahhibahstate, 0);
@@ -252,7 +253,7 @@ class FrontController extends Controller
                             ->where('current_stat',$currentstat)
                             ->groupBy('current_stat')
                             ->orderBy('proposal.current_stat', 'ASC')->first();
-                            if(count($Proposalstatebansos) <> 0){
+                            if($Proposalstatebansos !== null && count(array($Proposalstatebansos)) <> 0){
                                 array_push($jumlahbansosstate, $Proposalstatebansos->jumlah);
                             }else{
                                 array_push($jumlahbansosstate, 0);
@@ -271,5 +272,7 @@ class FrontController extends Controller
       
         return view('frontEnd.home',compact("Banner","ProposalType","Skpd","tahun","th","State","jumlahopd","nilaiopd","jumlahhibah","jumlahbansos","nilaistate","jumlahhibahstate","jumlahbansosstate","jumlahproposalstate","nilaihibah","nilaibansos","Proposalhibah","Proposalbansos","perubahan"));
     }
-
+    public function pengumuman(){
+        return view('frontEnd.pengumuman');
+    }
 }             

@@ -19,12 +19,12 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    // protected $table = 'user';
 
-
-    protected $fillable = [
-        'name','username', 'email', 'password','is_skpd','skpd_id','address','phone','ktp','is_active','status'
-    ];
+    
+    // protected $fillable = [
+    //     'name','username', 'email', 'password','is_skpd','skpd_id','address','phone','ktp','is_active','status'
+    // ];
+    protected $guard = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -38,7 +38,7 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->hasOne(Roles::class, 'id');
+        return $this->belongsTo(Roles::class, 'id');
     }
 
     /**

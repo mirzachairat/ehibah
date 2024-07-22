@@ -37,36 +37,33 @@ class AuthController extends Controller
     }
 
     public function loginPost(Request $request){
-        $roleid = isset(Auth::user()->id)?Auth::user()->id:'';
-        if($roleid != ''){
-            return Redirect::to('/admin');
-        }
         MetaTag::set('title', 'E-HibahBansos - Login Operator');
         MetaTag::set('description', 'E-HibahBansos - Aplikasi Hibah Bansos Provinsi Banten');
-
+        
         $validator = Validator::make($request->all(), [
             'email'    => 'required|email',
             'password' => 'required'
         ]);
 
-        if ($validator->fails()) return sendError('Validation Error.', $validator->errors(), 422);
+        if ($validator->fails()) {
+            return sendError('Validation Error.', $validator->errors(), 422);
+        }
         $credentials = $request->only('email', 'password');
-        if (Auth()->attempt($credentials)) {
-            if($roleid != 3 || $roleid != 7){
+        
+        if (Auth::attempt($credentials)) {
+            $roleid = Auth::user()->role_id__;
+            if ($roleid != 3 && $roleid != 7) {
                 LogLogin::create([
-                    'username'     => 'email',
+                    'username'     => $request->email,
                     'role'         => 'website_admin',
-                    // 'client_ip'    => $request->getClientIp(),
-                    'client_agent' => $_SERVER['HTTP_USER_AGENT'],
+                    'client_agent' => $request->header('User-Agent'),
                 ]);
-                // Auth::loginUsingId($cekktp->id);
                 return Redirect::to('/admin');
             }
-        }       
-            else{
-                    Session::flash('error', 'Uppss.. proses login gagal, Password atau Email, Salah!');
-                    return redirect()->route('login');
-                }
+        } else {
+            Session::flash('error', 'Uppss.. proses login gagal, Password atau Email, Salah!');
+            return redirect()->route('login');
+        }
     }   
     
     public function logout(Request $request)
