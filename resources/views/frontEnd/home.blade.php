@@ -105,7 +105,8 @@
                                                     <i class="fa fa-book fa-3x" style="padding: 10% 0;"></i>
                                                 </div>
                                                 <div class="col-lg-8 col-md-8 col-sm-8 pull-right" align="right">
-                                                    <figure>Nilai Pengajuan {!! (count($Proposalhibah) > 0 && isset($Proposalhibah->type->name))?$Proposalhibah->type->name:'Hibah' !!}</figure>
+                                                    {{-- <figure>Nilai Pengajuan {!! (count($Proposalhibah > 0) && isset($Proposalhibah->type->name))?$Proposalhibah->type->name:'Hibah' !!}</figure> --}}
+                                                    <figure>Nilai Pengajuan </figure>
                                                     <figure>Rp. {{number_format($nilaihibah,0,",",".")}},-</figure>
                                                 </div>
                                             </div>
@@ -116,10 +117,12 @@
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="col-lg-4 col-md-4 col-sm-4 pull-left" align="left">
-                                                    <div class="label label-default">Tahun Anggaran {!! (count($Proposalhibah) > 0 && isset($Proposalhibah->tahun))?$Proposalhibah->tahun:$th !!}  {!! ($perubahan=='1')?'Perubahan':'' !!}</div>
+                                                    {{-- <div class="label label-default">Tahun Anggaran {!! (count($Proposalhibah) > 0 && isset($Proposalhibah->tahun))?$Proposalhibah->tahun:$th !!}  {!! ($perubahan=='1')?'Perubahan':'' !!}</div> --}}
+                                                    <div class="label label-default">Tahun Anggaran </div>
                                                 </div>
                                                 <div class="col-lg-8 col-md-8 col-sm-8 pull-right" align="right">
-                                                    <div class="label label-default">Jumlah : {!! (count($Proposalhibah) > 0 && isset($Proposalhibah->jumlah))?$Proposalhibah->jumlah:0 !!}</div>
+                                                    {{-- <div class="label label-default">Jumlah : {!! (count($Proposalhibah) > 0 && isset($Proposalhibah->jumlah))?$Proposalhibah->jumlah:0 !!}</div> --}}
+                                                    <div class="label label-default">Jumlah : </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -137,21 +140,22 @@
                                                     <i class="fa fa-book fa-3x" style="padding: 10% 0;"></i>
                                                 </div>
                                                 <div class="col-lg-8 col-md-8 col-sm-8 pull-right" align="right">
-                                                    <figure>Nilai Pengajuan {!! (count($Proposalbansos) > 0 && isset($Proposalbansos->type->name))?$Proposalbansos->type->name:'Bansos' !!}</figure>
+                                                    {{-- <figure>Nilai Pengajuan {!! (count($Proposalbansos) > 0 && isset($Proposalbansos->type->name))?$Proposalbansos->type->name:'Bansos' !!}</figure> --}}
+                                                    <figure>Nilai Pengajuan </figure>
                                                     <figure>Rp. {{number_format($nilaibansos,0,",",".")}},-</figure>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
-                                            <hr style="margin: 5px 0;">
+                                            <hr style="margin: 5px 0">
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="col-lg-4 col-md-4 col-sm-4 pull-left" align="left">
-                                                    <div class="label label-default">Tahun Anggaran {!! (count($Proposalbansos) > 0 && isset($Proposalbansos->tahun))?$Proposalbansos->tahun:$th !!}  {!! ($perubahan=='1')?'Perubahan':'' !!}</div>
+                                                    <div class="label label-default">Tahun Anggaran</div>
                                                 </div>
                                                 <div class="col-lg-8 col-md-8 col-sm-8 pull-right" align="right">
-                                                    <div class="label label-default">Jumlah : {!! (count($Proposalbansos) > 0 && isset($Proposalbansos->jumlah))?$Proposalbansos->jumlah:0 !!}</div>
+                                                    <div class="label label-default">Jumlah : </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -160,8 +164,9 @@
                             </div>
                         </div>   
                         <?php
-                            $total = $nilaibansos + $nilaihibah; 
-                            $jumlah = ((count($Proposalhibah) > 0 && isset($Proposalhibah->jumlah))?$Proposalhibah->jumlah:0)+((count($Proposalbansos) > 0 && isset($Proposalbansos->jumlah))?$Proposalbansos->jumlah:0);
+                            $total = $nilaibansos + $nilaihibah 
+                            // $jumlah = ((count($Proposalhibah) > 0 && isset($Proposalhibah->jumlah))?$Proposalhibah->jumlah:0)+((count($Proposalbansos) > 0 && isset($Proposalbansos->jumlah))?$Proposalbansos->jumlah:0);
+                             
                         ?>
                         <div class="col-md-4 col-sm-4 kolom">
                             <div class="item" data-id="4">
@@ -187,7 +192,7 @@
                                                     <div class="label label-default">Tahun Anggaran {!! $th !!}  {!! ($perubahan=='1')?'Perubahan':'' !!}</div>
                                                 </div>
                                                 <div class="col-lg-8 col-md-8 col-sm-8 pull-right" align="right">
-                                                    <div class="label label-default">Jumlah : {!! $jumlah !!}</div>
+                                                    <div class="label label-default">Jumlah : </div>
                                                 </div>
                                             </div>
                                         </div>

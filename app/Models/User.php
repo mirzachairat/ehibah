@@ -24,6 +24,8 @@ class User extends Authenticatable
     // protected $fillable = [
     //     'name','username', 'email', 'password','is_skpd','skpd_id','address','phone','ktp','is_active','status'
     // ];
+
+    protected $table ='user';
     protected $guard = [];
 
     /**
