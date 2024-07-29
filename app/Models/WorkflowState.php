@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class WorkflowState extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','label','status','workflow_id'];
-    protected $hidden = ['created_at','deleted_at','updated_at'];
+    protected $table = 'workflow_state';
+    protected $fillable = ['name', 'label', 'status', 'workflow_id'];
+    protected $hidden = ['created_at', 'deleted_at', 'updated_at'];
 
-	public function WorkName()
+    public function WorkName()
     {
-       return $this->belongsTo(Workflow::class,'workflow_id','id');
+        return $this->belongsTo(Workflow::class, 'workflow_id', 'id');
     }
 }

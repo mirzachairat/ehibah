@@ -9,12 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Banner extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    public $timestamps = true;
-    use SoftDeletes;
+    // public $timestamps = true;
 	protected $table = 'banner';
 
-    protected $dates = ['deleted_at'];
+    // protected $dates = ['deleted_at'];
     protected $fillable = array('name','gambar', 'status');
 }
