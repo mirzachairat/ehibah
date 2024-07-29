@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\DaerahController;
+use App\Http\Controllers\Api\ProposalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -62,6 +63,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api.key'], function () {
     Route::get('kota', [DaerahController::class, 'getKota']);
     Route::get('kecamatan/{id}', [DaerahController::class, 'getKecamatan']);
     Route::get('kelurahan/{id}', [DaerahController::class, 'getKelurahan']);
+    Route::get('proposal', [ProposalController::class, 'getProposal']);
 
 
 });
