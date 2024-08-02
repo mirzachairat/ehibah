@@ -73,12 +73,19 @@ class ProposalController extends Controller
         //jika sudah bisa create bisa didelete
 
         $locked = Helper::locked();
-		$Userid = Auth::user();
-		dd($Userid);
+		$Userid = Auth::user()->id;
+		
 
 		$username = Auth::user();
+		//codingan yg lama
+        // if($locked != 1){
+        //     if(Auth::user()->role_id__('superadministrator') && !Auth::user()->role('administrator')){
+        //         Session::flash('warning', 'Input Proposal Hibah Bansos Telah Ditutup.');
+        //         return redirect()->route('proposals')->with('message', 'Input Proposal Hibah Bansos Telah Ditutup.');
+        //     }
+        // }
         if($locked != 1){
-            if(Auth::user()->role('superadministrator') && !Auth::user()->role('administrator')){
+            if(Auth::user()->role_id__ == 1 && !Auth::user()->role_id__ == 2){
                 Session::flash('warning', 'Input Proposal Hibah Bansos Telah Ditutup.');
                 return redirect()->route('proposals')->with('message', 'Input Proposal Hibah Bansos Telah Ditutup.');
             }

@@ -219,7 +219,9 @@
 									</select>
                                 </div>
                             </div>
-							@if(Auth::user()->hasRole('opd') || Auth::user()->hasRole('superadministrator') || Auth::user()->hasRole('administrator')) 
+                            {{-- codingan lama --}}
+							{{-- @if(Auth::user()->hasRole('opd') || Auth::user()->hasRole('superadministrator') || Auth::user()->hasRole('administrator'))  --}}
+							@if(Auth::user()->role_id__ == 5 || Auth::user()->role_id__ == 1|| Auth::user()->role_id__ == 2) 
 						
 							</br>
 							 <fieldset>

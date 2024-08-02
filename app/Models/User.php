@@ -40,7 +40,7 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsTo(Roles::class, 'id');
+        return $this->belongsToMany(Roles::class);
     }
 
     /**

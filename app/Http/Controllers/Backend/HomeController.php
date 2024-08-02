@@ -21,7 +21,7 @@ class HomeController extends Controller
         if(Auth::user()->id=='1'){
             $actions = LogLogin::orderBy('created_at', 'DESC')->paginate(env('BACKEND_PAGINATION'));
         }else{
-            $actions = LogLogin::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->paginate(env('BACKEND_PAGINATION'));
+            $actions = LogLogin::where('id', Auth::user()->id)->orderBy('created_at', 'DESC')->paginate(env('BACKEND_PAGINATION'));
         }
 		$data['Loglogin']	= $actions;
         return view('backEnd.home', $data);

@@ -26,9 +26,17 @@ class Helper
 	
 	static function tahunanggaran()
     {
-		$lock = Lock::orderby('id', 'asc')->first();
-		if (count($lock) > 0){
-			$p = $lock->ta;
+
+		$locks = Lock::orderby('id', 'asc')->first();
+		$lockCount = $locks->count();
+		// codingan yg lama
+		// if ($lock > 0){
+		// 	$p = $lock->ta;
+		// } else{
+		// 	$p = 1; 
+		// }
+		if ($lockCount > 0){
+			$p = $locks->ta;
 		} else{
 			$p = 1; 
 		}
@@ -38,7 +46,8 @@ class Helper
 	static function perubahan()
     {
 		$lock = Lock::orderby('id', 'asc')->first();
-		if (count($lock) > 0){
+		$lockCount = $lock->count();
+		if ($lockCount > 0){
 			$p = $lock->perubahan;
 		} else{
 			$p = 0; 
